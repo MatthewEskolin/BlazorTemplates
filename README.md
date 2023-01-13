@@ -1,2 +1,2 @@
-# -BlazorTemplates
+# BlazorTemplates
 I'm Learning Blazor
