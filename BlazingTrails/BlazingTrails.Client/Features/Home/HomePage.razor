@@ -1,0 +1,41 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>Matt's Trails</PageTitle>
+
+@if (_trails == null)
+{
+    <p>Loading trails...</p>
+}
+else
+{
+    <div class="grid">
+        @foreach (var trail in _trails)
+        {
+            <TrailCard Trail="trail"></TrailCard>
+        }
+
+    </div>               
+}
+
+
+@code {
+
+    private IEnumerable<Trail>? _trails;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var result = await Http.GetFromJsonAsync<IEnumerable<Trail>>("/trails/trail-data.json");
+            _trails = result ?? throw new Exception("Can't get trail data");
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+    }
+
+}
