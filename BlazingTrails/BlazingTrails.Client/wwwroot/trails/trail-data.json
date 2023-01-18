@@ -1,32 +1,32 @@
 ﻿[
   {
     "id": 1,
-    "image": "trails/1.jpg",
-    "name": "Countryside Ramble",
-    "location": "Durbach, Germany",
-    "timeInMinutes": 195,
+    "image": "trails/central_park.jpg",
+    "name": "Central Park",
+    "location": "Roseville, MN",
+    "timeInMinutes": 50,
     "length": 11,
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla volutpat orci at augue ultricies fermentum. Ut massa lectus, dignissim sed molestie ut, viverra vel diam. Fusce at iaculis magna. Suspendisse vel est et est luctus ornare venenatis ut neque. Pellentesque varius lacus sed arcu pellentesque, a porttitor velit gravida. Nunc nunc lectus, rhoncus consectetur metus eget, fermentum laoreet mauris. Cras ac gravida ante. Ut in ante ex. Proin tristique a ligula vel pharetra. Vestibulum blandit nisl dui, in pulvinar metus mollis pharetra. Duis cursus porttitor libero, quis lacinia velit. Curabitur tincidunt laoreet mi, eu maximus nibh vestibulum sed. Phasellus orci.",
+    "description": "Central Park Run to the swamp",
     "route": [
       {
         "stage": 1,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "description": "Bennet Lake"
       },
       {
         "stage": 2,
-        "description": "Curabitur interdum molestie tempus."
+        "description": "Baseball Fields."
       },
       {
         "stage": 3,
-        "description": "Suspendisse convallis nunc ut lorem cursus, ac venenatis neque maximus."
+        "description": "Aboretum"
       },
       {
         "stage": 4,
-        "description": "Aenean nisi dolor, sollicitudin quis pellentesque vel, pharetra et ex."
+        "description": "Swamp"
       },
       {
         "stage": 5,
-        "description": "Vestibulum vulputate velit quis mi suscipit, eget pharetra enim tristique."
+        "description": "Returning Home"
       }
     ]
   },
