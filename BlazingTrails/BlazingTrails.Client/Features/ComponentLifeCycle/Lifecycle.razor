@@ -21,11 +21,12 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await Task.CompletedTask;
         //Console.WriteLine("OnInitializedAsync");
 
-    //Console.WriteLine("OnInitializedAsync - Begin");
-    //await Task.Delay(300);
-    //Console.WriteLine("OnInitializedAsync - End");
+        //Console.WriteLine("OnInitializedAsync - Begin");
+        //await Task.Delay(300);
+        //Console.WriteLine("OnInitializedAsync - End");
     }
 
     protected override void OnParametersSet()
@@ -35,6 +36,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        await Task.CompletedTask;
         Console.WriteLine("OnParametersSetAsync");
     }
 
@@ -45,6 +47,7 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        await Task.CompletedTask;
         Console.WriteLine($"OnAfterRenderAsync (First render: {firstRender})");
     }
 
@@ -55,6 +58,7 @@
 
     public async ValueTask DisposeAsync()
     {
+        await Task.CompletedTask;
         Console.WriteLine($"DisposeAsync");
     }
 

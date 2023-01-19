@@ -12,7 +12,7 @@
                         @_activeTrail.Location
                     </h6>
                     <div class="mt-4">
-                        <span style="margin-right: 5px;" >
+                        <span style="margin-right: 5px;">
                             <span class="oi oi-clock" style="margin-right:2px"></span>
                             @_activeTrail.TimeFormatted
                         </span>
@@ -21,20 +21,20 @@
                             @_activeTrail.Length Km
                         </span>
                     </div>
+                    <p class="mt-4">@_activeTrail.Description</p>
                 </div>
-
+            </div>
+            <div class="drawer-controls">
+                <button class="btn btn-secondary" @onclick="Close">Close</button>
             </div>
         }
-
-
-
-
     </div>
-
-
 </div>
 
-@code {
+
+
+
+  @code {
 
     private bool _isOpen;
     private Trail? _activeTrail;
