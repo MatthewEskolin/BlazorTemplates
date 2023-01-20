@@ -1,0 +1,28 @@
+﻿@page "/search/{SearchTerm}"
+@inject HttpClient Http
+
+<PageTitle>Search Trails - Blazing Trails</PageTitle>
+
+
+<h3> Search Results for "@SearchTerm"</h3>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Search</li>
+    </ol>
+</nav>
+
+
+@code {
+
+    private IEnumerable<Trail>? _searchResults;
+
+    [Parameter]
+    public string SearchTerm { get; set; } = default!;
+
+
+
+}
+
+
