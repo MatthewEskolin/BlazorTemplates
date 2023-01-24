@@ -14,13 +14,50 @@
 </nav>
 
 
+@if (_searchResults == null)
+{
+    <p>Loading search results...</p>
+}
+else
+{
+    <TrailDetails Trail="_selectedTrail" />
+
+    <div class="grid">
+        @foreach (var trail in _searchResults)
+        {
+            <TrailCard Trail="trail" OnSelected="HandleTrailSelected" />
+        }
+    </div>
+}
+
+
 @code {
 
     private IEnumerable<Trail>? _searchResults;
 
+    private Trail? _selectedTrail;
+
     [Parameter]
     public string SearchTerm { get; set; } = default!;
 
+    private void HandleTrailSelected(Trail trail)
+        => _selectedTrail = trail;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var allTrails = await Http.GetFromJsonAsync<IEnumerable<Trail>>("trails/trail-data.json");
+            _searchResults = allTrails!.Where(x => x.Name.Contains(SearchTerm, StringComparison.CurrentCultureIgnoreCase)
+                                                   || x.Location.Contains(SearchTerm, StringComparison.CurrentCultureIgnoreCase));
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"There was a problem loading trail data: {ex.Message}");
+        }
+    }
 
 
 }
