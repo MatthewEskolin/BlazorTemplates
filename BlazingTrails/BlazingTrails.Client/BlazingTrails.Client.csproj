@@ -15,6 +15,7 @@
 
 	<ItemGroup>
 		<Watch Include="**/*.scss" />
+		<Watch Remove="Features\Home\SearchFilter.razor.scss" />
 		<Watch Remove="Features\Home\TrailDetails.razor.scss" />
 		<Watch Remove="Features\Search\TrailSearch.razor.scss" />
 		<None Update="**/*.css" Watch="false" />
