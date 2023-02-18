@@ -137,5 +137,11 @@ else if (_errorMessage is not null)
         _trail = new TrailDto();
         _errorMessage = null;
         _submitSuccessful = true; *@
+        _submitSuccessful = false;
+        _errorMessage = "dummy";
+
+        await Task.CompletedTask;
+        return;
+
     }
 }
