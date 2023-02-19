@@ -1,5 +1,6 @@
 @page "/add-trail"
-@* @inject IMediator Mediator *@
+@inject IMediator Mediator
+
 
 <PageTitle>Add Trail - Blazing Trails</PageTitle>
 
@@ -126,7 +127,7 @@ else if (_errorMessage is not null)
 
     private async Task SubmitForm()
     {
-        @* var response = await Mediator.Send(new AddTrailRequest(_trail));
+        var response = await Mediator.Send(new AddTrailRequest(_trail));
         if (response.TrailId == -1)
         {
             _errorMessage = "There was a problem saving your trail.";
@@ -136,7 +137,7 @@ else if (_errorMessage is not null)
 
         _trail = new TrailDto();
         _errorMessage = null;
-        _submitSuccessful = true; *@
+        _submitSuccessful = true;
         _submitSuccessful = false;
         _errorMessage = "dummy";
 
