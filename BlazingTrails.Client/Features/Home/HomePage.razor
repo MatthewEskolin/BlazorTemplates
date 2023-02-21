@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject HttpClient Http
+@inject NavigationManager nav
 
 <PageTitle>Matt's Trails</PageTitle>
 
@@ -11,6 +12,8 @@ else
 {
     <TrailDetails Trail="_selectedTrail"></TrailDetails>
     <TrailSearch />
+
+    <NavLink class="nav-link" href="add-trail">Add Trail(Nav)</NavLink>
 
     <div class="grid">
         @foreach (var trail in _trails)
@@ -39,6 +42,12 @@ else
             Console.WriteLine(e);
             throw;
         }
+
+    }
+
+    void Navigate()
+    {
+        nav.NavigateTo("add-trail");
 
     }
 

@@ -111,11 +111,14 @@ else if (_errorMessage is not null)
 
     <div class="mt-4 mb-5">
         <div class="row">
-            <div class="offset-4 col-8 text-right">
+            <div class="col-4">
+            </div>
+
+            <div class="col-8" style="text-align: right;">
                 <button class="btn btn-outline-secondary" type="button" @onclick="@(() => _trail = new TrailDto())">Reset</button>
                 <button class="btn btn-primary" type="submit">Submit</button>
             </div>
-        </div>
+        </div>        
     </div>
 </EditForm>
 
@@ -138,11 +141,5 @@ else if (_errorMessage is not null)
         _trail = new TrailDto();
         _errorMessage = null;
         _submitSuccessful = true;
-        _submitSuccessful = false;
-        _errorMessage = "dummy";
-
-        await Task.CompletedTask;
-        return;
-
     }
 }
