@@ -32,7 +32,7 @@ else if (_errorMessage is not null)
     </div>
 }
 
-<EditForm Model="_trail" OnValidSubmit="SubmitForm">
+<EditForm EditContext="_editContext" OnValidSubmit="SubmitForm">
     <FluentValidationValidator />
 
     <FormSection Title="Basic Details"
@@ -65,6 +65,12 @@ else if (_errorMessage is not null)
             <label for="trailLength" class="font-weight-bold text-secondary">Length (km)</label>
             <InputNumber @bind-Value="_trail.Length" class="form-control" id="trailLength" />
             <ValidationMessage For="@(() => _trail.Length)" />
+        </FormFieldSet>
+        
+        <FormFieldSet Width="col-5">
+            <label for="trailTime" class="font-weight-bold text-secondary">Time</label>
+            <InputTime @bind-Value="_trail.TimeInMinutes" id="trailTime" />
+            <ValidationMessage For="@(() => _trail.TimeInMinutes)" />
         </FormFieldSet>
 
     </FormSection>
@@ -127,6 +133,16 @@ else if (_errorMessage is not null)
     private bool _submitSuccessful;
     private string? _errorMessage;
 
+    private EditContext _editContext = default!;
+
+    protected override void OnInitialized()
+    {
+        _editContext = new EditContext(_trail);
+        _editContext.SetFieldCssClassProvider(new BootstrapCssClassProvider());
+
+
+    }
+
 
     private async Task SubmitForm()
     {
@@ -136,6 +152,9 @@ else if (_errorMessage is not null)
             _errorMessage = "There was a problem saving your trail.";
             _submitSuccessful = false;
             return;
+
+
+
         }
 
         _trail = new TrailDto();
