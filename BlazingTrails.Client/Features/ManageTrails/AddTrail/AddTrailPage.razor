@@ -55,6 +55,11 @@ else if (_errorMessage is not null)
             <InputText @bind-Value="_trail.Location" class="form-control" id="trailLocation" />
             <ValidationMessage For="@(() => _trail.Location)" />
         </FormFieldSet>
+        
+        <FormFieldSet Width="col-6">
+            <label for="trailImage" class="font-weight-bold text-secondary">Image</label>
+            <InputFile OnChange="LoadTrailImage" class="form-control-file" id="trailImage" accept=".png,.jpg,.jpeg" />
+        </FormFieldSet>
 
     </FormSection>
 
@@ -132,6 +137,8 @@ else if (_errorMessage is not null)
     private TrailDto _trail = new TrailDto();
     private bool _submitSuccessful;
     private string? _errorMessage;
+    
+    private IBrowserFile? _trailImage;
 
     private EditContext _editContext = default!;
 
@@ -145,22 +152,54 @@ else if (_errorMessage is not null)
         //comment test
     }
 
+    private void LoadTrailImage(InputFileChangeEventArgs e)
+    {
+        _trailImage = e.File;
+    }
+
 
     private async Task SubmitForm()
     {
         var response = await Mediator.Send(new AddTrailRequest(_trail));
+
         if (response.TrailId == -1)
         {
             _errorMessage = "There was a problem saving your trail.";
             _submitSuccessful = false;
             return;
-
-
-
         }
 
+        if (_trailImage is null)
+        {
+            _submitSuccessful = true;
+            ResetForm();
+            return;
+        }
+
+        await ProcessImage(response.TrailId);
+
+    }
+
+    private void ResetForm()
+    {
         _trail = new TrailDto();
-        _errorMessage = null;
+        _editContext = new EditContext(_trail);
+        _editContext.SetFieldCssClassProvider(new BootstrapCssClassProvider());
+        _trailImage = null;
+    }
+
+    private async Task ProcessImage(int trailId)
+    {
+        var imageUploadResponse = await Mediator.Send(new UploadTrailImageRequest(trailId, _trailImage));
+
+        if (string.IsNullOrWhiteSpace(imageUploadResponse.ImageName))
+        {
+            _errorMessage = "Your trail was saved, but there was a problem uploading the image.";
+            return;
+        }
+
         _submitSuccessful = true;
+        ResetForm();
+
     }
 }
