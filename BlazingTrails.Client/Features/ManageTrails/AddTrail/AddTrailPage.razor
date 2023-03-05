@@ -1,4 +1,5 @@
 @page "/add-trail"
+@using BlazingTrails.Shared.Features.ManageTrails.Shared
 @inject IMediator Mediator
 
 
@@ -190,7 +191,7 @@ else if (_errorMessage is not null)
 
     private async Task ProcessImage(int trailId)
     {
-        var imageUploadResponse = await Mediator.Send(new UploadTrailImageRequest(trailId, _trailImage));
+        var imageUploadResponse = await Mediator.Send(new UploadTrailImageRequest(trailId, _trailImage!));
 
         if (string.IsNullOrWhiteSpace(imageUploadResponse.ImageName))
         {
