@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Diagnostics
 @inject HttpClient Http
 @inject NavigationManager nav
 
@@ -34,6 +35,8 @@ else
     {
         try
         {
+            string rootpath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot");
+            Debug.Write(rootpath);
             var result = await Http.GetFromJsonAsync<IEnumerable<Trail>>("/trails/trail-data.json");
             _trails = result ?? throw new Exception("Can't get trail data");
         }
