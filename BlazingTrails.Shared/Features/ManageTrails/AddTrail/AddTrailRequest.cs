@@ -1,7 +1,7 @@
 using FluentValidation;
 using MediatR;
 
-namespace BlazingTrails.Shared.Features.ManageTrails;
+namespace BlazingTrails.Shared.Features.ManageTrails.AddTrail;
 
 public record AddTrailRequest(TrailDto Trail) : IRequest<AddTrailRequest.Response>
 {

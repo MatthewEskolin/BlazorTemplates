@@ -9,6 +9,10 @@ public class TrailDto
     public string Name { get; set; } = "";
     public string Description { get; set; } = "";
     public string Location { get; set; } = "";
+    public string? Image { get; set; }
+    public ImageAction ImageAction { get; set; }
+
+
     public int TimeInMinutes { get; set; }
     public int Length { get; set; }
     public List<RouteInstruction> Route { get; set; } = new List<RouteInstruction>();
@@ -19,6 +23,15 @@ public class TrailDto
         public string Description { get; set; } = "";
     }
 }
+
+
+public enum ImageAction
+{
+    None,
+    Add,
+    Remove
+}
+
 
 public class TrailValidator:AbstractValidator<TrailDto>
 {
