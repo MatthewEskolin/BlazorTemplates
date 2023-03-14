@@ -24,6 +24,7 @@ public class AddTrailHandler : IRequestHandler<AddTrailRequest, AddTrailRequest.
         }
         else
         {
+            //why negative 1?
             return new AddTrailRequest.Response(-1);
         }
     }
