@@ -22,10 +22,10 @@
 	<ItemGroup>
 		<Watch Include="**/*.scss" />
 		<None Remove="Features\ManageTrails\Shared\InputTime.razor.scss" />
+		<Watch Remove="features\home\HomePage.razor.scss" />
 		<Watch Remove="Features\Home\SearchFilter.razor.scss" />
 		<Watch Remove="Features\Home\TrailDetails.razor.scss" />
 		<Watch Remove="Features\ManageTrails\Shared\InputTime.razor.scss" />
-		<Watch Remove="Features\Search\TrailSearch.razor.scss" />
 		<Content Include="Features\ManageTrails\Shared\InputTime.razor.scss" />
 		<None Update="**/*.css" Watch="false" />
 	</ItemGroup>

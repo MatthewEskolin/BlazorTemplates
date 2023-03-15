@@ -9,6 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingTrails.Api", "Blazin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingTrails.Shared", "Blazingtrails.Shared\BlazingTrails.Shared.csproj", "{3A5CE1C9-8828-461E-943E-E125FC7E1E54}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Matt", "Matt", "{6E6AB184-B8BA-4A81-9D05-E7BE8C4C102B}"
+	ProjectSection(SolutionItems) = preProject
+		Notes.txt = Notes.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

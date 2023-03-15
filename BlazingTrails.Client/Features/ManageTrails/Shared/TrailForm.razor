@@ -101,6 +101,7 @@
     <div class="mt-4 mb-5">
         <div class="row">
             <div class="col-4">
+                <button class="btn btn-danger" type="button" @onclick="DeleteTrail"></button>
             </div>
 
             <div class="col-8" style="text-align: right;">
@@ -169,5 +170,12 @@
 
 
     private async Task SubmitForm() => await OnSubmit(_trail, _trailImage);
+
+    private Task DeleteTrail(MouseEventArgs e)
+    {
+
+
+        return Task.CompletedTask;
+    }
 
 }

@@ -1,9 +1,11 @@
 using System.Net.Http.Json;
 using BlazingTrails.Shared.Features.ManageTrails.AddTrail;
+using JetBrains.Annotations;
 using MediatR;
 
 namespace BlazingTrails.Client.Features.ManageTrails.AddTrail;
 
+[UsedImplicitly]
 public class AddTrailHandler : IRequestHandler<AddTrailRequest, AddTrailRequest.Response>
 {
     private readonly HttpClient _httpClient;
