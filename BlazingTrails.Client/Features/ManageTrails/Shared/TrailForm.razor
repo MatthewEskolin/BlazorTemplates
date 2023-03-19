@@ -111,10 +111,7 @@
     <div class="mt-4 mb-5">
         <div class="row">
             <div class="col-4">
-                <button class="btn btn-danger" type="button" @onclick="DeleteTrail">Delete via MediatR</button>
-            </div>
-            <div class="col-4">
-                <button class="btn btn-danger" type="button" @onclick="DeleteTrail2">Delete via Less Code</button>
+                <button class="btn btn-danger" type="button" @onclick="DeleteTrail">Delete</button>
             </div>
             <div class="col-8" style="text-align: right;">
                 <button class="btn btn-outline-secondary" type="button" @onclick="@(() => _trail = new TrailDto())">Reset</button>
@@ -218,53 +215,6 @@
 
 
     }
-
-    private Task DeleteTrail2(MouseEventArgs e)
-    {
-
-        return Task.CompletedTask;
-
-
-    //if (!response.IsSuccess)
-    //{
-    //    _submitSuccessful = false;
-    //    _errorMessage = "There was a problem saving your trail.";
-    //}
-    //else
-    //{
-    //    _trail.Name = trail.Name;
-    //    _trail.Description = trail.Description;
-    //    _trail.Location = trail.Location;
-    //    _trail.Length = trail.Length;
-    //    _trail.TimeInMinutes = trail.TimeInMinutes;
-    //    _trail.Route.Clear();
-    //    _trail.Route.AddRange(trail.Route.Select(ri => new TrailDto.RouteInstruction
-
-    //    {
-    //        Stage = ri.Stage,
-    //        Description = ri.Description
-    //    }));
-
-    //    _submitSuccessful = true;
-
-    //    if (trail.ImageAction == ImageAction.Add) _submitSuccessful = await ProcessImage(trail.Id, image!);
-    //    if (trail.ImageAction == ImageAction.Remove) _trail.Image = null;
-    //}
-
-    //StateHasChanged();
-
-    //if (!response.IsSuccess)
-    //{
-    //    _submitSuccessful = false;
-    //    _errorMessage = "There was a problem saving your trail.";
-    //}
-    //else
-    //{
-    //}
-
-    //StateHasChanged();
-    }
-
 
     public bool Error { get; set; }
     public string ErrorText { get; set; }

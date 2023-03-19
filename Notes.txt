@@ -1,2 +1,5 @@
 TODO - Add delete function and use it!
-3/17/2023 - unsupported media type when trying to delete...
+3/17/2023 - unsupported media type when trying to delete.
+3/19/2023 - align delete buttons to submit, try deleting without mediatR to see if it is simpler.
+
+
