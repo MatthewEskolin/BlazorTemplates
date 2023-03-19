@@ -10,3 +10,5 @@ public record GetTrailsRequest : IRequest<GetTrailsRequest.Response>
     public record Response(IEnumerable<Trail> Trails);
 }
 
+
+

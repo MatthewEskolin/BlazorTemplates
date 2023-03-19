@@ -1,5 +1,6 @@
 ﻿using Ardalis.ApiEndpoints;
 using BlazingTrails.Api.Persistence;
+using BlazingTrails.Shared.Features.Home.Shared;
 using BlazingTrails.Shared.Features.ManageTrails.EditTrail;
 using BlazingTrails.Shared.Features.ManageTrails;
 using BlazingTrails.Shared.Features.ManageTrails.AddTrail;
@@ -74,29 +75,22 @@ public class DeleteTrailEndpoint : EndpointBaseAsync.WithRequest<DeleteTrailRequ
     [HttpDelete(DeleteTrailRequest.RouteTemplate)]
     public override async Task<ActionResult<bool>> HandleAsync(DeleteTrailRequest request, CancellationToken cancellationToken = default)
     {
-        var trail = await _database.Trails.Include(x => x.Route).SingleOrDefaultAsync(x => x.Id == request.Trail.Id, cancellationToken: cancellationToken);
+        var trail = await _database.Trails.Include(x => x.Route).SingleOrDefaultAsync(x => x.Id == request.DeleteTrail.TrailId, cancellationToken: cancellationToken);
 
         if (trail is null)
         {
             return BadRequest("Trail could not be found.");
         }
 
-        trail.Name = request.Trail.Name;
-        trail.Description = request.Trail.Description;
-        trail.Location = request.Trail.Location;
-        trail.TimeInMinutes = request.Trail.TimeInMinutes;
-        trail.Length = request.Trail.Length;
-        trail.Route = request.Trail.Route.Select(ri => new RouteInstruction
-        {
-            Stage = ri.Stage,
-            Description = ri.Description,
-            Trail = trail
-        }).ToList();
+        //Delete Routes, then delete Trail
+        _database.RouteInstructions.RemoveRange(trail.Route);
+        _database.Trails.Remove(trail);
 
-        if (request.Trail.ImageAction == ImageAction.Remove)
+        //remove image
+        if (trail.Image != null)
         {
+            //delete it
             System.IO.File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "Images", trail.Image!));
-            trail.Image = null;
         }
 
         await _database.SaveChangesAsync(cancellationToken);

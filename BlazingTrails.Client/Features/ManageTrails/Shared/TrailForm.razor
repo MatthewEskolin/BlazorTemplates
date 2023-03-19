@@ -1,10 +1,11 @@
 ﻿@using BlazingTrails.Shared.Features.ManageTrails.AddTrail
-@inject Mediator Mediator;
+@using BlazingTrails.Shared.Features.Home.Shared
+@inject IMediator Mediator;
 @inject NavigationManager Nav;
 
 @if (@Error)
 {
-    <ErrorAlert @Message="Error Text"></ErrorAlert>
+    <ErrorAlert Message="Error Text"></ErrorAlert>
 }
 
 <EditForm EditContext="_editContext" OnValidSubmit="SubmitForm">
@@ -124,6 +125,7 @@
 </EditForm>
 
 
+
 @code {
 
     private TrailDto _trail = new TrailDto();
@@ -134,13 +136,26 @@
     [Parameter, EditorRequired] public Func<TrailDto, IBrowserFile?, Task> OnSubmit { get; set; } = default!;
     [Parameter] public TrailDto? Trail { get; set; }
 
-    public void ResetForm()
+    public async void ResetForm()
     {
         _trail = new TrailDto();
         _editContext = new EditContext(_trail);
         _editContext.SetFieldCssClassProvider(new BootstrapCssClassProvider());
         _trailImage = null;
+
+        await BackToTop();
+
+        //scroll to top
     }
+
+    [Inject]
+    IJSRuntime JsRuntime { get; set; } = default!;
+    private async Task BackToTop()
+    {
+        await JsRuntime.InvokeVoidAsync("backToTop");
+    }
+
+
 
     protected override void OnParametersSet()
     {
@@ -188,7 +203,7 @@
         if (trailDto == null) return;
 
 
-        var response = await Mediator.Send(new DeleteTrailRequest(trailDto.Id));
+        var response = await Mediator.Send(new DeleteTrailRequest(new DeleteTrailDto(trailDto.Id)));
         if (!response.Success)
         {
             Error = true;
@@ -197,7 +212,7 @@
         else
         {
             //Confirm Delete - navigate to home
-            Nav.NavigateTo("Home");
+            Nav.NavigateTo("");
         }
 
         StateHasChanged();
@@ -208,47 +223,47 @@
     private Task DeleteTrail2(MouseEventArgs e)
     {
 
+        return Task.CompletedTask;
 
 
+    //if (!response.IsSuccess)
+    //{
+    //    _submitSuccessful = false;
+    //    _errorMessage = "There was a problem saving your trail.";
+    //}
+    //else
+    //{
+    //    _trail.Name = trail.Name;
+    //    _trail.Description = trail.Description;
+    //    _trail.Location = trail.Location;
+    //    _trail.Length = trail.Length;
+    //    _trail.TimeInMinutes = trail.TimeInMinutes;
+    //    _trail.Route.Clear();
+    //    _trail.Route.AddRange(trail.Route.Select(ri => new TrailDto.RouteInstruction
 
-        if (!response.IsSuccess)
-        {
-            _submitSuccessful = false;
-            _errorMessage = "There was a problem saving your trail.";
-        }
-        else
-        {
-            _trail.Name = trail.Name;
-            _trail.Description = trail.Description;
-            _trail.Location = trail.Location;
-            _trail.Length = trail.Length;
-            _trail.TimeInMinutes = trail.TimeInMinutes;
-            _trail.Route.Clear();
-            _trail.Route.AddRange(trail.Route.Select(ri => new TrailDto.RouteInstruction
+    //    {
+    //        Stage = ri.Stage,
+    //        Description = ri.Description
+    //    }));
 
-            {
-                Stage = ri.Stage,
-                Description = ri.Description
-            }));
+    //    _submitSuccessful = true;
 
-            _submitSuccessful = true;
+    //    if (trail.ImageAction == ImageAction.Add) _submitSuccessful = await ProcessImage(trail.Id, image!);
+    //    if (trail.ImageAction == ImageAction.Remove) _trail.Image = null;
+    //}
 
-            if (trail.ImageAction == ImageAction.Add) _submitSuccessful = await ProcessImage(trail.Id, image!);
-            if (trail.ImageAction == ImageAction.Remove) _trail.Image = null;
-        }
+    //StateHasChanged();
 
-        StateHasChanged();
+    //if (!response.IsSuccess)
+    //{
+    //    _submitSuccessful = false;
+    //    _errorMessage = "There was a problem saving your trail.";
+    //}
+    //else
+    //{
+    //}
 
-        if (!response.IsSuccess)
-        {
-            _submitSuccessful = false;
-            _errorMessage = "There was a problem saving your trail.";
-        }
-        else
-        {
-        }
-
-        StateHasChanged();
+    //StateHasChanged();
     }
 
 
