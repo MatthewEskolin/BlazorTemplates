@@ -3,7 +3,8 @@
 @using MediatR
 @inject NavigationManager Nav
 @inject IMediator Mediator
-
+@inject IJSRuntime Js
+@*@inject IJSObjectReference JsModule;*@
 
 <PageTitle>Matt's Trails</PageTitle>
 
@@ -43,7 +44,8 @@ else
             <TrailCard Trail="trail" OnSelected="HandleTrailSelected"></TrailCard>
         }
 
-    </div>               
+    </div>      
+    <button @onclick="jsTest" >Run JS</button>
 }
 
 
@@ -74,6 +76,13 @@ else
 
             //var result = await Http.GetFromJsonAsync<IEnumerable<Trail>>("/trails/trail-data.json");
             //_trails = result ?? throw new Exception("Can't get trail data");
+
+            //string[] parms = {"test"};
+            //_jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", );
+
+
+            //JsModule = await Js.InvokeAsync<IJSObjectReference>("import", "./scripts/jsscripts.js");
+
         }
         catch (HttpRequestException e)
         {
@@ -85,6 +94,28 @@ else
 
     private void HandleTrailSelected(Trail trail) =>  _selectedTrail = trail;
 
+    //public async void jsTest()
+    //{
+        
+    //    await Js.InvokeVoidAsync("alert", "Warning!"); // Alert
+
+    //    await Js.InvokeAsync<bool>("confirm", "Are you sure?"); // Confirm
+    //    await Js.InvokeAsync<string>("prompt", "Take some input:"); // Prompt
+
+    //    await Js.InvokeVoidAsync("alertTest");
+
+
+    //}
+
+
+
+    public async Task jsTest()
+    {
+        await Js.InvokeVoidAsync("window.scrollTo", "0", "0");
+    //await JsModule.InvokeVoidAsync("testalert");
     }
+
+
+}
 
 

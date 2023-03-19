@@ -145,14 +145,13 @@
 
         await BackToTop();
 
-        //scroll to top
     }
 
     [Inject]
     IJSRuntime JsRuntime { get; set; } = default!;
     private async Task BackToTop()
     {
-        await JsRuntime.InvokeVoidAsync("backToTop");
+        await JsRuntime.InvokeVoidAsync("window.scrollTo", "0", "0");
     }
 
 
