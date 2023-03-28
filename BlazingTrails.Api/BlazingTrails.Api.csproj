@@ -43,4 +43,8 @@
     <Folder Include="Persistence\Entities\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Persistence\Data\blazingtrails.db" CopyToOutputDirectory="PreserveNewest"></Content>
+  </ItemGroup>
+
 </Project>
