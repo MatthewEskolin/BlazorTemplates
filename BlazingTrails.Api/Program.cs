@@ -52,7 +52,7 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 
-//log envs
+//TODO move to LibProject -> log envs
 foreach(DictionaryEntry e in System.Environment.GetEnvironmentVariables())
 {
     Log.Information(e.Key  + ":" + e.Value);
