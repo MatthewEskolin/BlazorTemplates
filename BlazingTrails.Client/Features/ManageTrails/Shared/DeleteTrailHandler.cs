@@ -37,7 +37,7 @@ public class DeleteTrailHandler: IRequestHandler<DeleteTrailRequest, DeleteTrail
                 new DeleteTrailRequest.Response(true) : 
                 new DeleteTrailRequest.Response(false);
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException) 
         {
             return default!;
         }
