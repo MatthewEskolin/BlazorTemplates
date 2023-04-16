@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using System.Diagnostics
 @using MediatR
+@using Home.Shared;
 @inject NavigationManager Nav
 @inject IMediator Mediator
 @inject IJSRuntime Js
@@ -20,8 +21,35 @@ else
     @if (_trails.Any())
     {
         <div class="mb-4">
-            <p class="font-italic text-center"> Do you have an awesome trail you'd like to share?     <NavLink class="nav-link" href="add-trail">Add it here</NavLink> </p>
+            <p class="font-italic text-center">Do you have an awesome trail you'd like to share? <a href="add-trail">Add it here</a>.</p>
         </div>
+
+        <ViewSwitcher Items="_trails" Context="trail">
+            <GridTemplate>
+                <TrailCard Trail="trail" OnSelected="HandleTrailSelected" />
+            </GridTemplate>
+            <HeaderTemplate>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Length</th>
+                <th>Time</th>
+                <th></th>
+            </HeaderTemplate>
+            <RowTemplate>
+                <th scope="col">@trail.Name</th>
+                <td>@trail.Location</td>
+                <td>@(trail.Length)km</td>
+                <td>@trail.TimeFormatted</td>
+                <td class="text-right">
+                    <button @onclick="@(() => HandleTrailSelected(trail))" title="View" class="btn btn-primary">
+                        <i class="bi bi-binoculars"></i>
+                    </button>
+                    <button @onclick="@(() => Nav.NavigateTo($"/edit-trail/{trail.Id}"))" title="Edit" class="btn btn-outline-secondary">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </td>
+            </RowTemplate>
+        </ViewSwitcher>
         
     }
     else
@@ -37,15 +65,14 @@ else
     }
 
 
-
+@* 
     <div class="grid">
         @foreach (var trail in _trails)
         {
             <TrailCard Trail="trail" OnSelected="HandleTrailSelected"></TrailCard>
         }
 
-    </div>      
-    <button @onclick="jsTest" >Run JS</button>
+    </div>       *@
 }
 
 
@@ -93,19 +120,6 @@ else
     }
 
     private void HandleTrailSelected(Trail trail) =>  _selectedTrail = trail;
-
-    //public async void jsTest()
-    //{
-        
-    //    await Js.InvokeVoidAsync("alert", "Warning!"); // Alert
-
-    //    await Js.InvokeAsync<bool>("confirm", "Are you sure?"); // Confirm
-    //    await Js.InvokeAsync<string>("prompt", "Take some input:"); // Prompt
-
-    //    await Js.InvokeVoidAsync("alertTest");
-
-
-    //}
 
 
 
