@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Matt", "Matt", "{6E6AB184-B
 		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blazingtrails.componentlibrary", "blazingtrails.componentlibrary\blazingtrails.componentlibrary.csproj", "{0B80C88A-5A99-4170-BC2B-CC1FCD237660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazingtrails.Componentlibrary", "blazingtrails.componentlibrary\Blazingtrails.Componentlibrary.csproj", "{0B80C88A-5A99-4170-BC2B-CC1FCD237660}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

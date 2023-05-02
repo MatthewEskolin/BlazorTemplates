@@ -1,22 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
+	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<NpmLastInstall>node_modules/.last-install</NpmLastInstall>
-  </PropertyGroup>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.16" />
+	</ItemGroup>
 
-
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.16" />
-  </ItemGroup>
 	<Target Name="CheckForNpm" BeforeTargets="RunNpmInstall">
 		<Exec Command="npm --version" ContinueOnError="true">
 			<Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
@@ -36,4 +34,5 @@
 
 		<Exec Command="npm run sass -- %(ScopedScssFiles.Identity) %(relativedir)%(filename).css" />
 	</Target>
+
 </Project>
