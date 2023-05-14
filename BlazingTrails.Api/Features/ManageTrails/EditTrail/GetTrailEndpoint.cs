@@ -18,7 +18,7 @@ public class GetTrailEndpoint : EndpointBaseAsync.WithRequest<int>.WithActionRes
     [HttpGet(GetTrailRequest.RouteTemplate)]
     public override async Task<ActionResult<GetTrailRequest.Response>> HandleAsync(int trailId, CancellationToken cancellationToken = default)
     {
-        var trail = await _context.Trails.Include(x => x.Route).SingleOrDefaultAsync(x => x.Id == trailId, cancellationToken: cancellationToken);
+        var trail = await _context.Trails.Include(x => x.Waypoints).SingleOrDefaultAsync(x => x.Id == trailId, cancellationToken: cancellationToken);
 
         if (trail is null)
         {
@@ -32,7 +32,7 @@ public class GetTrailEndpoint : EndpointBaseAsync.WithRequest<int>.WithActionRes
             trail.TimeInMinutes,
             trail.Length,
             trail.Description,
-            trail.Route.Select(ri => new GetTrailRequest.RouteInstruction(ri.Id, ri.Stage, ri.Description))));
+            trail.Waypoints.Select(ri => new GetTrailRequest.Waypoint(ri.Latitude, ri.Longitude))));
 
         return Ok(response);
     }

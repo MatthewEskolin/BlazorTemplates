@@ -18,7 +18,7 @@ public class DeleteTrailEndpoint : EndpointBaseAsync.WithRequest<DeleteTrailRequ
     [HttpDelete(DeleteTrailRequest.RouteTemplate)]
     public override async Task<ActionResult<bool>> HandleAsync(DeleteTrailRequest request, CancellationToken cancellationToken = default)
     {
-        var trail = await _database.Trails.Include(x => x.Route).SingleOrDefaultAsync(x => x.Id == request.DeleteTrail.TrailId, cancellationToken: cancellationToken);
+        var trail = await _database.Trails.Include(x => x.Waypoints).SingleOrDefaultAsync(x => x.Id == request.DeleteTrail.TrailId, cancellationToken: cancellationToken);
 
         if (trail is null)
         {
@@ -26,7 +26,7 @@ public class DeleteTrailEndpoint : EndpointBaseAsync.WithRequest<DeleteTrailRequ
         }
 
         //Delete Routes, then delete Trail
-        _database.RouteInstructions.RemoveRange(trail.Route);
+        _database.Waypoints.RemoveRange(trail.Waypoints);
         _database.Trails.Remove(trail);
 
         //remove image

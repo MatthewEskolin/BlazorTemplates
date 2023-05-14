@@ -33,7 +33,7 @@ public class GetTrailsEndpoint : EndpointBaseAsync.WithRequest<int>.WithActionRe
     {
         // throw new Exception("Log this please!");
 
-        var trails = await _context.Trails.Include(x => x.Route).ToListAsync(cancellationToken);
+        var trails = await _context.Trails.Include(x => x.Waypoints).ToListAsync(cancellationToken);
         
 
         var response = new GetTrailsRequest.Response(trails.Select(trail => new GetTrailsRequest.Trail(

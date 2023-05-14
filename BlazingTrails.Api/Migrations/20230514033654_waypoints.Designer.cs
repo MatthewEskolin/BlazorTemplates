@@ -2,6 +2,7 @@
 using BlazingTrails.Api.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazingTrails.Api.Migrations
 {
     [DbContext(typeof(BlazingTrailsContext))]
-    partial class BlazingTrailsContextModelSnapshot : ModelSnapshot
+    [Migration("20230514033654_waypoints")]
+    partial class waypoints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.13");
